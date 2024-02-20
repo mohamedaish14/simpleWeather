@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>simple api</title>
+    <style>
+        
+ body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #091F43;
+}
+
+
+
+.title{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 1% 0;
+    width: 30%;
+    
+}
+.title .h1{
+    margin: 0;
+    font-size: 100px;
+}
+
+.search-area{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 2% 0;
+    width: 20%;
+}
+
+.search-box{
+    background-color: #091F43;
+    color: white;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 2px solid white;
+    padding: 1%; 
+    font-size: 30px; 
+    margin-right: 6%;
+   
+}
+
+.search-box::placeholder {
+    color: white; 
+
+}
+
+
+.submit{
+            border-radius: 5px;
+            background-color: #ff0932;
+            color: white;
+            font-size: 25px;
+            border-radius: 6px;
+            border: 0;
+            padding: 2%;
+            cursor: pointer;
+
+        }
+.api-output{
+            display: flex;
+            justify-content: center;
+           text-align: center;
+          flex-direction: row; 
+          max-width: 50%; 
+          
+        }
+        .city1,.city2{
+            display:flex ;
+            flex-direction: column;
+            align-items: start;
+            padding-left: 5%;
+            width: 20rem;
+            height: 22rem;
+            background-color: white;
+            margin: 2%;
+           border-radius: 10px;
+           transition: all 0.5s ease;
+          
+        }
+
+@media (max-width: 767px) {
+    .city1,.city2{
+        width:15rem;
+        height: 14rem;
+    }
+    
+}
+        .name1,.name2{
+            font-size: 2vw;
+            min-width: 3vw;
+            margin-bottom: 25px;
+            color: gray;
+        }
+        .degree1,.degree2{
+            font-size: 5vw;
+            margin:0;
+        }
+        .img1,.img2{
+         margin-top: 10%;
+         width:30%;
+        }
+        .desc1,.desc2{
+            padding-top: 10%;
+        }
+ 
+    </style>
+</head>
+<body>
+    <div class="title">
+        <h1>Simple Weather App</h1>
+    </div>
+    <div class="search-area" style="display: flex; flex-direction: row;">
+        <input  class="search-box" type="text" placeholder="Search for a city">
+        <button type="submit" class="submit">submit</button>
+    </div>
+    <div class="api-output">
+        <div class="city1">
+            <h2 class="name1"></h2>
+            <h3 class="degree1"></h3>
+            <img class="img1"   src="" >
+            <p class="desc1" style="color: gray;" ></p>
+        </div>
+        <div class="city2">
+            <h2 class="name2"  ></h2>
+            <h3 class="degree2"></h3>
+            <img class="img2" src=""  >
+            <p class="desc2" style="color: gray;"></p>
+        </div>
+    </div>
+
+   
+</body>
+
+
+<script src='./node_modules/axios/dist/axios.min.js'></script>
+<script>
+function show_degrees(cityname){
+    let params={
+        key:"4dffce52b78949b7a1b174025241802",
+        q:`${cityname}}`
+        }
+        axios.get('http://api.weatherapi.com/v1/current.json', {
+    params:params
+  })
+  .then(function (response) {
+    //console.log(response)
+    //first fill the  seconde city with the data of the first to replce it when new city entered
+    let City2= document.querySelector(".name1").innerHTML;
+    let City2deg=document.querySelector(".degree1").innerHTML;
+   let City2img =document.querySelector(".img1").src;
+    let City2desc =document.querySelector(".desc1").innerHTML;
+
+    document.querySelector(".name1").innerHTML=response.data.location.name;
+    document.querySelector(".degree1").innerHTML=response.data.current.temp_c;
+   document.querySelector(".img1").src=response.data.current.condition.icon;
+    document.querySelector(".desc1").innerHTML=response.data.current.condition.text;
+
+    document.querySelector(".name2").innerHTML=City2;
+    document.querySelector(".degree2").innerHTML=City2deg;
+    document.querySelector(".img2").src=City2img;
+    document.querySelector(".desc2").innerHTML=City2desc;
+
+   
+
+
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+}
+
+
+const submit_button=document.querySelector('.submit');
+submit_button.addEventListener("click",function(){
+  
+        var city= search_city.value;
+       show_degrees(city)
+}   
+    );
+
+const search_city=document.querySelector('.search-box');
+search_city.addEventListener('keydown', function(event) {
+    if (event.keyCode === 13) {
+        var city= event.target.value;
+        show_degrees(city)
+    }
+});
+   
+</script>
+</html>
