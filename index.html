@@ -70,6 +70,7 @@
             cursor: pointer;
 
         }
+      
 .api-output{
             display: flex;
             justify-content: center;
@@ -86,7 +87,7 @@
         
             min-height: 300px;
             min-width: 200px;
-            background-color: white;
+            background-color: rgb(233, 229, 229);
             margin: 2%;
            border-radius: 10px;
       
@@ -99,7 +100,7 @@
             color: gray;
         }
         .degree1,.degree2{
-            font-size: 55px;
+            font-size: 45px;
             margin:0;
          
         }
@@ -124,6 +125,7 @@
         <input  class="search-box" type="text" placeholder="Search for a city">
         <button type="submit" class="submit">SUBMIT</button>
     </div>
+   
     <div class="api-output">
         <div class="city1">
             <h2 class="name1"></h2>
@@ -145,40 +147,52 @@
 
 <script src='./node_modules/axios/dist/axios.min.js'></script>
 <script>
-function show_degrees(cityname){
-    let params={
-        key:"4dffce52b78949b7a1b174025241802",
-        q:`${cityname}}`
-        }
-        axios.get('http://api.weatherapi.com/v1/current.json', {
-    params:params
-  })
-  .then(function (response) {
-    console.log(response)
+    const key ="cd8377c12613e6e8cb29c7da04b83220";
+    const url = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+    function chooseImage(desc){
+        if (desc == "Clouds") {
+     return "imgs/clouds.png";
+   
+    } else if (desc == "Clear") {
+      return "imgs/clear.png";
+   
+    } else if (desc == "Rain") {
+      return "imgs/rain.png";
+     
+    } else if (desc == "Drizzle") {
+      return"imgs/drizzle.png";
+     
+    } else if (desc == "Mist") {
+      return "imgs/mist.png";
+    } else if (desc == "Snow") {
+      return "imgs/snow.png";
+    }else if (desc == "Haze") {
+      return "imgs/haze.png";
+    }};
+async function show_degrees(cityname){
+    const response= await fetch(url + cityname + `&appid=${key}`);
+    var data = await response.json();
+    console.log(data)
+
     //first fill the  seconde city with the data of the first to replce it when new city entered
     let City2= document.querySelector(".name1").innerHTML;
     let City2deg=document.querySelector(".degree1").innerHTML;
    let City2img =document.querySelector(".img1").src;
     let City2desc =document.querySelector(".desc1").innerHTML;
 
-    document.querySelector(".name1").innerHTML=response.data.location.name;
-    document.querySelector(".degree1").innerHTML=response.data.current.temp_c;
-   document.querySelector(".img1").src=response.data.current.condition.icon;
-    document.querySelector(".desc1").innerHTML=response.data.current.condition.text;
+    document.querySelector(".name1").innerHTML=data.name;
+    document.querySelector(".degree1").innerHTML=data.main.temp;
+  document.querySelector(".img1").src=chooseImage(data.weather[0].main);
+    document.querySelector(".desc1").innerHTML=data.weather[0].main;
 
     document.querySelector(".name2").innerHTML=City2;
     document.querySelector(".degree2").innerHTML=City2deg;
     document.querySelector(".img2").src=City2img;
     document.querySelector(".desc2").innerHTML=City2desc;
+  }
 
    
 
-
-  })
-  .catch(function (error) {
-    console.log(error);
-  })
-}
 
 
 const submit_button=document.querySelector('.submit');
@@ -193,6 +207,7 @@ const search_city=document.querySelector('.search-box');
 search_city.addEventListener('keydown', function(event) {
     if (event.keyCode === 13) {
         var city= event.target.value;
+        event.preventDefault();
         show_degrees(city)
     }
 });
