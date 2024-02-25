@@ -46,7 +46,7 @@
     border-right: 0;
     border-bottom: 2px solid white;
     padding: 1%; 
-    font-size: 2vw; 
+    font-size: 25px; 
     margin-right: 6%;
     outline: none;
    
@@ -62,8 +62,9 @@
             border-radius: 5px;
             background-color: #ff0932;
             color: white;
-            font-size: 2vw;
-            border-radius: 6px;
+            border-radius: 10px;
+            width: 5rem;
+            border-radius: 4px;
             border: 0;
             padding: 2%;
             cursor: pointer;
@@ -82,42 +83,35 @@
             flex-direction: column;
             align-items: start;
             padding-left: 5%;
-            width: 22vw;
-            height: 22vw;
+        
+            min-height: 300px;
+            min-width: 200px;
             background-color: white;
             margin: 2%;
            border-radius: 10px;
-          /* overflow:auto;*/
-          /* transition: all 0.5s ease;*/
+      
           
         }
-/*
-@media (max-width: 767px) {
-    .city1,.city2{
-        width:15rem;
-        height: 14rem;
-    }
-    
-}*/
         .name1,.name2{
-            font-size: 2vw;
+            font-size: 25px;
             min-width: 3vw;
            
             color: gray;
         }
         .degree1,.degree2{
-            font-size: 5vw;
+            font-size: 55px;
             margin:0;
          
         }
         .img1,.img2{
-          
-         width:4vw;
+          margin-top: 10px;
+          margin-bottom: 10px;
+         width:55px;
         }
        
          .desc1,.desc2 {
             padding-top: 1vw;
-            font-size: 1.3vw;
+            font-size: 20px;
 }
  
     </style>
@@ -128,14 +122,14 @@
     </div>
     <div class="search-area" style="display: flex; flex-direction: row;">
         <input  class="search-box" type="text" placeholder="Search for a city">
-        <button type="submit" class="submit">submit</button>
+        <button type="submit" class="submit">SUBMIT</button>
     </div>
     <div class="api-output">
         <div class="city1">
-            <h2 class="name1"></h2>
+            <h2 class="name1">n</h2>
             <h3 class="degree1"></h3>
             <img class="img1"   src="" >
-            <p class="desc1" style="color: gray;" ></p>
+            <p class="desc1" style="color: gray;" >cloudy</p>
         </div>
         <div class="city2">
             <h2 class="name2"  ></h2>
@@ -160,7 +154,7 @@ function show_degrees(cityname){
     params:params
   })
   .then(function (response) {
-    //console.log(response)
+    console.log(response)
     //first fill the  seconde city with the data of the first to replce it when new city entered
     let City2= document.querySelector(".name1").innerHTML;
     let City2deg=document.querySelector(".degree1").innerHTML;
