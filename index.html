@@ -59,8 +59,10 @@
     color: white;
 
 }
-
-
+@media (max-width:600px) {
+            .search-box{
+                font-size: 5vw;
+            }}
 .submit{
             border-radius: 5px;
             background-color: #ff0932;
@@ -96,16 +98,16 @@
             padding-left: 5%;
            /* min-width: 12rem;
             height: 20rem; */
-            min-height: 270px;
-            min-width: 200px;
+            min-height: 275px;
+            min-width: 250px;
             background-color: rgb(233, 229, 229);
             margin: 2%;
            border-radius: 10px
         }
-        @media (max-width:451px) {
+        @media (max-width:600px) {
             .city1,.city2{
-                min-height: 275px;
-            min-width: 150px;
+                min-height: 270px;
+            min-width: 45vw;
             }
        }
         .name1,.name2{
@@ -121,6 +123,8 @@
             margin:0;
 
         }
+        @media (max-width:451px) {.degree1,.degree2{font-size: 35px;}}
+       
         .img1,.img2{
           margin-top: 15px;
          
