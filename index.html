@@ -38,6 +38,8 @@
     width: 20%;
 }
 
+       
+
 .search-box{
     background-color: #091F43;
     color: white;
@@ -46,11 +48,12 @@
     border-right: 0;
     border-bottom: 2px solid white;
     padding: 1%;
-    font-size: 25px;
+    font-size: 22px;
     margin-right: 6%;
     outline: none;
 
 }
+
 
 .search-box::placeholder {
     color: white;
@@ -93,22 +96,28 @@
             padding-left: 5%;
            /* min-width: 12rem;
             height: 20rem; */
-            min-height: 275px;
+            min-height: 270px;
             min-width: 200px;
             background-color: rgb(233, 229, 229);
             margin: 2%;
-           border-radius: 10px;
-
-
+           border-radius: 10px
         }
+        @media (max-width:451px) {
+            .city1,.city2{
+                min-height: 275px;
+            min-width: 150px;
+            }
+       }
         .name1,.name2{
-            font-size: 25px;
+            font-size: 22px;
             min-width: 3vw;
-
             color: gray;
         }
+        @media (max-width:451px) {.name1,.name2{font-size: 15px;}}
+       
+       
         .degree1,.degree2{
-            font-size: 45px;
+            font-size: 43px;
             margin:0;
 
         }
