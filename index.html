@@ -174,7 +174,7 @@ async function show_degrees(cityname){
     let City2desc =document.querySelector(".desc1").innerHTML;
 
 document.querySelector(".name1").innerHTML=response.data.location.name;
-    document.querySelector(".degree1").innerHTML=response.data.current.temp_c+"°C";
+    document.querySelector(".degree1").innerHTML=response.data.current.temp_c+" °C";
     document.querySelector(".img1").src=response.data.current.condition.icon;
     document.querySelector(".desc1").innerHTML=response.data.current.condition.text;
 
